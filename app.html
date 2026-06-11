@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoQuest | Gamificacao Sustentavel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">EQ</span>
+        <div>
+          <strong>EcoQuest</strong>
+          <small>ODS 12 em acao</small>
+        </div>
+      </div>
+
+      <nav class="nav-tabs" aria-label="Navegacao principal">
+        <button class="nav-button active" data-view="dashboard" type="button">Dashboard</button>
+        <button class="nav-button" data-view="missoes" type="button">Missoes</button>
+        <button class="nav-button" data-view="ranking" type="button">Ranking</button>
+        <button class="nav-button" data-view="conquistas" type="button">Conquistas</button>
+        <button class="nav-button" data-view="trocas" type="button">Trocas</button>
+      </nav>
+
+      <div class="side-note">
+        <strong>Estrutura de dados</strong>
+        <span>Fila de missoes pendentes + lista encadeada de itens.</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Plataforma web sustentavel</p>
+          <h1>Transforme habitos em impacto positivo.</h1>
+        </div>
+        <button class="ghost-button" id="resetApp" type="button">Reiniciar demo</button>
+      </header>
+
+      <section class="notice" id="toast" aria-live="polite"></section>
+
+      <section class="view active" id="dashboard">
+        <div class="metrics-grid">
+          <article class="metric-card primary">
+            <span>Pontos totais</span>
+            <strong id="totalPoints">0</strong>
+            <small id="levelLabel">Nivel 1 - Broto Verde</small>
+          </article>
+          <article class="metric-card">
+            <span>Sequencia</span>
+            <strong id="streakDays">0 dias</strong>
+            <small>Registros sustentaveis seguidos</small>
+          </article>
+          <article class="metric-card">
+            <span>Missoes concluidas</span>
+            <strong id="completedCount">0</strong>
+            <small>Hoje e nesta semana</small>
+          </article>
+          <article class="metric-card">
+            <span>Conquistas</span>
+            <strong id="achievementCount">0/0</strong>
+            <small>Badges desbloqueados</small>
+          </article>
+        </div>
+
+        <div class="content-grid">
+          <article class="panel next-mission">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Fila de missoes</p>
+                <h2>Proxima acao sustentavel</h2>
+              </div>
+              <span class="pill" id="queueSize">0 na fila</span>
+            </div>
+            <div id="nextMissionCard"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Desempenho semanal</p>
+                <h2>Impacto por categoria</h2>
+              </div>
+            </div>
+            <div class="chart-list" id="impactChart"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="missoes">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Missoes diarias e semanais</p>
+            <h2>Registre uma atividade sustentavel</h2>
+          </div>
+          <span class="pill">Foto opcional</span>
+        </div>
+        <div class="mission-grid" id="missionList"></div>
+      </section>
+
+      <section class="view" id="ranking">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Competicao saudavel</p>
+            <h2>Ranking EcoQuest</h2>
+          </div>
+        </div>
+        <div class="ranking-list" id="rankingList"></div>
+      </section>
+
+      <section class="view" id="conquistas">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Gamificacao</p>
+            <h2>Conquistas e recompensas</h2>
+          </div>
+        </div>
+        <div class="achievement-grid" id="achievementList"></div>
+      </section>
+
+      <section class="view" id="trocas">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Economia circular</p>
+            <h2>Troque ou doe itens parados</h2>
+          </div>
+          <span class="pill">+25 pontos por item</span>
+        </div>
+
+        <div class="exchange-layout">
+          <form class="panel exchange-form" id="itemForm">
+            <label>
+              Nome do item
+              <input id="itemName" type="text" placeholder="Ex.: Mochila, livro, fone" required>
+            </label>
+            <label>
+              Categoria
+              <select id="itemCategory" required>
+                <option value="Roupas">Roupas</option>
+                <option value="Eletronicos">Eletronicos</option>
+                <option value="Livros">Livros</option>
+                <option value="Casa">Casa</option>
+                <option value="Outros">Outros</option>
+              </select>
+            </label>
+            <label>
+              Estado
+              <select id="itemCondition" required>
+                <option value="Novo">Novo</option>
+                <option value="Muito bom">Muito bom</option>
+                <option value="Bom">Bom</option>
+                <option value="Precisa de reparo">Precisa de reparo</option>
+              </select>
+            </label>
+            <label>
+              Descricao
+              <textarea id="itemDescription" rows="4" placeholder="Descreva o item e como combinar a troca."></textarea>
+            </label>
+            <button class="primary-button" type="submit">Cadastrar item</button>
+          </form>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Lista encadeada</p>
+                <h2>Itens disponiveis</h2>
+              </div>
+            </div>
+            <div class="item-list" id="itemList"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <template id="missionTemplate">
+    <article class="mission-card">
+      <div class="mission-top">
+        <span class="mission-icon"></span>
+        <span class="pill mission-frequency"></span>
+      </div>
+      <h3></h3>
+      <p></p>
+      <div class="mission-meta">
+        <span class="points"></span>
+        <span class="category"></span>
+      </div>
+      <label class="proof-upload">
+        <span>Anexar foto opcional</span>
+        <input type="file" accept="image/*">
+      </label>
+      <img class="proof-preview" alt="Previa da comprovacao">
+      <button class="primary-button complete-button" type="button">Concluir missao</button>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
