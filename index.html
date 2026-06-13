@@ -23,8 +23,8 @@
         <a href="#niveis">Niveis</a>
       </nav>
       <div class="lp-auth">
-        <button class="lp-btn-ghost" type="button" disabled title="Em breve">Entrar</button>
-        <button class="lp-btn-primary" type="button" disabled title="Em breve">Criar conta</button>
+        <button class="lp-btn-ghost" id="btnEntrar" type="button">Entrar</button>
+        <button class="lp-btn-primary" id="btnCriarConta" type="button">Criar conta</button>
       </div>
     </div>
   </header>
@@ -42,10 +42,10 @@
             tudo enquanto cuida do planeta.
           </p>
           <div class="lp-hero-actions">
-            <button class="lp-btn-primary lp-btn-lg" type="button" disabled title="Em breve">Comecar agora</button>
+            <button class="lp-btn-primary lp-btn-lg" type="button" onclick="document.getElementById('btnCriarConta').click()">Comecar agora</button>
             <a class="lp-btn-ghost lp-btn-lg" href="/app.html">Ver demonstracao</a>
           </div>
-          <p class="lp-hero-note">Login e cadastro chegam em breve. Acesse a demo sem conta.</p>
+          <p class="lp-hero-note">Crie sua conta gratis ou acesse a demo sem cadastro.</p>
         </div>
         <div class="lp-hero-visual" aria-hidden="true">
           <div class="lp-hero-card">
@@ -211,7 +211,7 @@
           <p>Explore a demo ou aguarde o cadastro para salvar seu progresso.</p>
         </div>
         <div class="lp-cta-actions">
-          <button class="lp-btn-primary lp-btn-lg" type="button" disabled title="Em breve">Criar conta gratis</button>
+          <button class="lp-btn-primary lp-btn-lg" type="button" onclick="document.getElementById('btnCriarConta').click()">Criar conta gratis</button>
           <a class="lp-btn-ghost lp-btn-lg" href="/app.html">Acessar demo</a>
         </div>
       </div>
@@ -229,5 +229,57 @@
     </div>
   </footer>
 
+  <dialog id="authModal" class="auth-modal">
+    <div class="auth-card">
+      <div class="auth-modal-header">
+        <div class="lp-brand">
+          <span class="lp-brand-mark">EQ</span>
+          <span class="lp-brand-name">EcoQuest</span>
+        </div>
+        <button class="auth-fechar" id="fecharModal" type="button" aria-label="Fechar">&times;</button>
+      </div>
+
+      <div class="auth-abas">
+        <button class="auth-aba ativa" id="tabEntrar" type="button">Entrar</button>
+        <button class="auth-aba" id="tabCadastrar" type="button">Criar conta</button>
+      </div>
+
+      <form id="formEntrar" novalidate>
+        <label class="auth-label">
+          Email
+          <input id="loginEmail" type="email" placeholder="seu@email.com" required>
+        </label>
+        <label class="auth-label">
+          Senha
+          <input id="loginSenha" type="password" placeholder="Sua senha" required>
+        </label>
+        <p class="auth-erro" id="erroEntrar"></p>
+        <button class="lp-btn-primary auth-submit" type="submit">Entrar</button>
+      </form>
+
+      <form id="formCadastrar" class="oculto" novalidate>
+        <label class="auth-label">
+          Nome completo
+          <input id="cadNome" type="text" placeholder="Seu nome" required>
+        </label>
+        <label class="auth-label">
+          Email
+          <input id="cadEmail" type="email" placeholder="seu@email.com" required>
+        </label>
+        <label class="auth-label">
+          Senha
+          <input id="cadSenha" type="password" placeholder="Minimo 6 caracteres" required>
+        </label>
+        <label class="auth-label">
+          Confirmar senha
+          <input id="cadConfirmar" type="password" placeholder="Repita a senha" required>
+        </label>
+        <p class="auth-erro" id="erroCadastrar"></p>
+        <button class="lp-btn-primary auth-submit" type="submit">Criar conta</button>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="auth.js"></script>
 </body>
 </html>

@@ -170,6 +170,19 @@ button {
   background: var(--green-dark);
 }
 
+.topbar-auth {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.usuario-topbar {
+  font-weight: 700;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .notice {
   min-height: 0;
 }

@@ -3,6 +3,7 @@ class PlataformaEcoQuest {
     this.apiBase = "";
     this.estado = null;
     this.toastTimer = null;
+    this.usuarioLogado = null;
     this.iniciarEventos();
     this.carregarEstado();
   }
@@ -17,12 +18,34 @@ class PlataformaEcoQuest {
       this.cadastrarItem();
     });
 
-    document.getElementById("resetApp").addEventListener("click", () => this.resetarDemo());
+    document.getElementById("logoutBtn").addEventListener("click", () => this.logout());
+  }
+
+  logout() {
+    localStorage.removeItem("ecoquest_user");
+    window.location.href = "/";
   }
 
   async carregarEstado() {
+    const dados = localStorage.getItem("ecoquest_user");
+    if (!dados) {
+      window.location.href = "/";
+      return;
+    }
+
+    this.usuarioLogado = JSON.parse(dados);
+    document.getElementById("nomeUsuario").textContent = this.usuarioLogado.nome;
+
     try {
-      const response = await fetch(`${this.apiBase}/api/estado`);
+      const response = await fetch(`${this.apiBase}/api/auth/reload`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: this.usuarioLogado.email })
+      });
+      if (!response.ok) {
+        this.logout();
+        return;
+      }
       this.estado = await response.json();
       this.renderizar();
     } catch (error) {
@@ -64,13 +87,6 @@ class PlataformaEcoQuest {
     document.getElementById("itemForm").reset();
     this.renderizar();
     this.mostrarAviso("Item cadastrado na lista encadeada do backend. Pontos atualizados.");
-  }
-
-  async resetarDemo() {
-    const response = await fetch(`${this.apiBase}/api/reset`, { method: "POST" });
-    this.estado = await response.json();
-    this.renderizar();
-    this.mostrarAviso("Demo reiniciada pelo backend Java.");
   }
 
   trocarTela(viewId) {

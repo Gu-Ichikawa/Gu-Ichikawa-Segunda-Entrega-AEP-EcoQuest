@@ -7,9 +7,12 @@ import ecoquest.model.ItemTroca;
 import ecoquest.model.Missao;
 import ecoquest.model.Nivel;
 import ecoquest.model.Usuario;
+import ecoquest.util.CsvUsuarios;
 import ecoquest.util.Json;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,6 +24,7 @@ public class EcoQuestService {
     private Usuario usuario;
     private FilaMissoes filaMissoes;
     private ListaEncadeadaItens itens;
+    private String emailAtual = null;
 
     public EcoQuestService() {
         criarMissoes();
@@ -29,10 +33,21 @@ public class EcoQuestService {
     }
 
     public void resetar() {
+        emailAtual = null;
         usuario = new Usuario("Joao Eco", 80, 3);
         itens = new ListaEncadeadaItens();
         itens.adicionar(new ItemTroca("Livro de algoritmos", "Livros", "Muito bom", "Livro usado para estudo, disponivel para troca por outro material academico."));
         itens.adicionar(new ItemTroca("Jaqueta jeans", "Roupas", "Bom", "Peca conservada, ideal para reuso em vez de descarte."));
+        montarFila();
+    }
+
+    public void carregarUsuario(String email, String nome, int pontos, int sequencia, List<String> missoesConcluidas) {
+        emailAtual = email;
+        usuario = new Usuario(nome, pontos, sequencia);
+        for (String id : missoesConcluidas) {
+            usuario.concluirMissao(id);
+        }
+        itens = new ListaEncadeadaItens();
         montarFila();
     }
 
@@ -45,6 +60,7 @@ public class EcoQuestService {
         usuario.adicionarPontos(missao.getPontos());
         usuario.aumentarSequencia();
         filaMissoes.removerPorId(id);
+        persistir();
         return true;
     }
 
@@ -56,6 +72,16 @@ public class EcoQuestService {
             usuario.adicionarPontos(missaoTroca.getPontos());
             usuario.aumentarSequencia();
             filaMissoes.removerPorId("troca");
+        }
+        persistir();
+    }
+
+    private void persistir() {
+        if (emailAtual == null) return;
+        try {
+            CsvUsuarios.atualizarProgresso(emailAtual, usuario.getPontos(), usuario.getSequencia(), usuario.getMissoesConcluidas());
+        } catch (IOException e) {
+            System.err.println("Erro ao persistir usuario: " + e.getMessage());
         }
     }
 
