@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoQuest | Gamificacao Sustentavel</title>
+  <title>EcoQuest | Gamificação Sustentável</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,13 +16,13 @@
         <span class="brand-mark">EQ</span>
         <div>
           <strong>EcoQuest</strong>
-          <small>ODS 12 em acao</small>
+          <small>ODS 12 em ação</small>
         </div>
       </div>
 
-      <nav class="nav-tabs" aria-label="Navegacao principal">
+      <nav class="nav-tabs" aria-label="Navegação principal">
         <button class="nav-button active" data-view="dashboard" type="button">Dashboard</button>
-        <button class="nav-button" data-view="missoes" type="button">Missoes</button>
+        <button class="nav-button" data-view="missoes" type="button">Missões</button>
         <button class="nav-button" data-view="ranking" type="button">Ranking</button>
         <button class="nav-button" data-view="conquistas" type="button">Conquistas</button>
         <button class="nav-button" data-view="trocas" type="button">Trocas</button>
@@ -30,15 +30,15 @@
 
       <div class="side-note">
         <strong>Estrutura de dados</strong>
-        <span>Fila de missoes pendentes + lista encadeada de itens.</span>
+        <span>Fila de missões pendentes + lista encadeada de itens.</span>
       </div>
     </aside>
 
     <main class="main-content">
       <header class="topbar">
         <div>
-          <p class="eyebrow">Plataforma web sustentavel</p>
-          <h1>Transforme habitos em impacto positivo.</h1>
+          <p class="eyebrow">Plataforma web sustentável</p>
+          <h1>Transforme hábitos em impacto positivo.</h1>
         </div>
         <div class="topbar-auth">
           <span id="nomeUsuario" class="usuario-topbar"></span>
@@ -53,15 +53,15 @@
           <article class="metric-card primary">
             <span>Pontos totais</span>
             <strong id="totalPoints">0</strong>
-            <small id="levelLabel">Nivel 1 - Broto Verde</small>
+            <small id="levelLabel">Nível 1 - Broto Verde</small>
           </article>
           <article class="metric-card">
-            <span>Sequencia</span>
+            <span>Sequência</span>
             <strong id="streakDays">0 dias</strong>
-            <small>Registros sustentaveis seguidos</small>
+            <small>Registros sustentáveis seguidos</small>
           </article>
           <article class="metric-card">
-            <span>Missoes concluidas</span>
+            <span>Missões concluídas</span>
             <strong id="completedCount">0</strong>
             <small>Hoje e nesta semana</small>
           </article>
@@ -76,8 +76,8 @@
           <article class="panel next-mission">
             <div class="panel-header">
               <div>
-                <p class="eyebrow">Fila de missoes</p>
-                <h2>Proxima acao sustentavel</h2>
+                <p class="eyebrow">Fila de missões</p>
+                <h2>Próxima ação sustentável</h2>
               </div>
               <span class="pill" id="queueSize">0 na fila</span>
             </div>
@@ -99,8 +99,8 @@
       <section class="view" id="missoes">
         <div class="section-header">
           <div>
-            <p class="eyebrow">Missoes diarias e semanais</p>
-            <h2>Registre uma atividade sustentavel</h2>
+            <p class="eyebrow">Missões diárias e semanais</p>
+            <h2>Registre uma atividade sustentável</h2>
           </div>
           <span class="pill">Foto opcional</span>
         </div>
@@ -110,7 +110,7 @@
       <section class="view" id="ranking">
         <div class="section-header">
           <div>
-            <p class="eyebrow">Competicao saudavel</p>
+            <p class="eyebrow">Competição saudável</p>
             <h2>Ranking EcoQuest</h2>
           </div>
         </div>
@@ -120,7 +120,7 @@
       <section class="view" id="conquistas">
         <div class="section-header">
           <div>
-            <p class="eyebrow">Gamificacao</p>
+            <p class="eyebrow">Gamificação</p>
             <h2>Conquistas e recompensas</h2>
           </div>
         </div>
@@ -146,7 +146,7 @@
               Categoria
               <select id="itemCategory" required>
                 <option value="Roupas">Roupas</option>
-                <option value="Eletronicos">Eletronicos</option>
+                <option value="Eletronicos">Eletrônicos</option>
                 <option value="Livros">Livros</option>
                 <option value="Casa">Casa</option>
                 <option value="Outros">Outros</option>
@@ -162,7 +162,7 @@
               </select>
             </label>
             <label>
-              Descricao
+              Descrição
               <textarea id="itemDescription" rows="4" placeholder="Descreva o item e como combinar a troca."></textarea>
             </label>
             <button class="primary-button" type="submit">Cadastrar item</button>
@@ -172,7 +172,7 @@
             <div class="panel-header">
               <div>
                 <p class="eyebrow">Lista encadeada</p>
-                <h2>Itens disponiveis</h2>
+                <h2>Itens disponíveis</h2>
               </div>
             </div>
             <div class="item-list" id="itemList"></div>
@@ -198,8 +198,8 @@
         <span>Anexar foto opcional</span>
         <input type="file" accept="image/*">
       </label>
-      <img class="proof-preview" alt="Previa da comprovacao">
-      <button class="primary-button complete-button" type="button">Concluir missao</button>
+      <img class="proof-preview" alt="Prévia da comprovação">
+      <button class="primary-button complete-button" type="button">Concluir missão</button>
     </article>
   </template>
 
